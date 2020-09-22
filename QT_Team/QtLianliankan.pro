@@ -12,9 +12,11 @@ TARGET = QtLianliankan
 TEMPLATE = app
 
 
-SOURCES += main.cpp
+SOURCES += main.cpp\
+    game_model.cpp
 
-HEADERS  +=
+HEADERS  += \
+    game_model.h
 
 FORMS    += main_game_window.ui
 
