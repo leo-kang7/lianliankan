@@ -47,13 +47,22 @@ void GameModel::startGame(GameLevel level)
     switch (gameLevel)
     {
     case BASIC:
+    {
         gameLevelNum = kBasicNum;
         break;
+    }
     case MEDIUM:
+    {
         gameLevelNum = kMediumNum;
         break;
+    }
+
     case HARD:
+    {
         gameLevelNum = kHardNum;
+        break;
+    }
+
     }
 
     // 填充方块标号
@@ -137,7 +146,9 @@ bool GameModel::isWin()
     {
         // 未消完
         if (gameMap[i])
+        {
             return false;
+        }
     }
     gameStatus = WIN;
     return true;
@@ -156,10 +167,15 @@ bool GameModel::canLinkDirectly(int srcX, int srcY, int dstX, int dstY)
     if (srcX == dstX)
     {
         if (srcY > dstY)
+        {
             std::swap(srcY, dstY);
+        }
         for (int y = srcY + 1; y < dstY; y++)
+            // 两个图标之间只要有其他的就不能直接消掉
             if (gameMap[MAX_COL * y + srcX])
+            {
                 return false;
+}
 
         if (!isFrozenMode)
         {
@@ -178,10 +194,14 @@ bool GameModel::canLinkDirectly(int srcX, int srcY, int dstX, int dstY)
     if (srcY == dstY)
     {
         if (srcX > dstX)
+        {
             std::swap(srcX, dstX);
+        }
         for (int x = srcX + 1; x < dstX; x++)
             if (gameMap[MAX_COL * srcY + x])
+            {
                 return false;
+}
 
         if (!isFrozenMode)
         {
@@ -430,27 +450,39 @@ bool GameModel::isCanLink(int srcX, int srcY, int dstX, int dstY)
 
     // 有一个或者两个都是空的
     if (gameMap[srcY * MAX_COL + srcX] == 0 || gameMap[dstY * MAX_COL + dstX] == 0)
+    {
         return false;
+}
 
     // 两个是同一个
     if (srcX == dstX && srcY == dstY)
+    {
         return false;
+}
 
     // 两个不是同一种图片
     if(gameMap[MAX_COL * srcY + srcX] != gameMap[MAX_COL * dstY + dstX])
+    {
         return false;
+}
 
     // 情况1：横向或者竖向可以直线连通
     if (canLinkDirectly(srcX, srcY, dstX, dstY))
+    {
         return true;
+    }
 
     // 情况2：一次拐弯可以连通
     if (canLinkWithOneCorner(srcX, srcY, dstX, dstY))
+    {
         return true;
+    }
 
     // 情况3：两次拐弯可以连通
-    if (canLinkWithTwoCorner(srcX, srcY, dstX, dstY))
+    if (canLinkWithTwoCorner(srcX, srcY, dstX, dstY))\
+    {
         return true;
+    }
 
     return false;
 }

@@ -16,11 +16,13 @@ const int MAX_ICON = 25;
 // 游戏状态
 enum GameStatus
 {
+    REAGY,
     PLAYING,
     PAUSE,
     WIN,
     OVER
 };
+
 // 游戏难度，不同的方块数
 const int kBasicNum = MAX_ROW * MAX_COL * 0.3;
 const int kMediumNum = MAX_ROW * MAX_COL * 0.7;
